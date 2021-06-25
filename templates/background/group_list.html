@@ -1,0 +1,242 @@
+{% extends "background/list_template.html" %}
+{% block mainbody %}
+        <div class="main-panel">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+							<i class="ti-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"> 小组列表 </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card" style="min-height: 485px">
+                            <div class="header">
+                                <h4 class="title">小组列表</h4>
+                            </div>
+                            <div class="content">
+                                <div class="table-full-width table-tasks">
+                                    <div id="task-actions" class="dropdown pull-right">
+                                        <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                            <i class="ti-more"></i>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <li>
+                                                <a href="/background/group_create.html">创建小组</a>
+                                            </li>
+                                            {% if request.session.user_id != 0 %}
+                                            <li>
+                                                <a href="javascript:join_group({{ request.session.user_id }})">加入小组</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <table class="table">
+                                        <tbody>
+                                        {% for item in group %}
+                                            {% if forloop.counter <= 5 %}
+                                            <tr>
+                                                <td>
+                                                    <label class="checkbox">
+                                                        <input value="">
+                                                    </label>
+                                                </td>
+                                                <td>{{ item.group_name }}</td>
+                                                <td class="td-actions text-right">
+                                                    <div class="table-icons">
+                                                        {% if request.session.user_id == 0 %}
+                                                        <button type="button" rel="tooltip" title="添加成员" class="btn btn-danger btn-simple btn-xs" onclick="addnumber({{ item.group_id }})">
+                                                            <i class="ti-plus"></i>
+                                                        </button>
+                                                        {% endif %}
+                                                        <button type="button" rel="tooltip" title="查看详情" class="btn btn-info btn-simple btn-xs" onclick="detail({{ item.group_id }})">
+                                                            <i class="ti-pencil-alt"></i>
+                                                        </button>
+                                                        {% if request.session.user_id == 0 %}
+                                                        <button type="button" rel="tooltip" title="删除小组" class="btn btn-danger btn-simple btn-xs" onclick="delete_group({{ item.group_id }})">
+                                                            <i class="ti-close"></i>
+                                                        </button>
+                                                        {% else %}
+                                                        <button type="button" rel="tooltip" title="退出小组" class="btn btn-danger btn-simple btn-xs " onclick="exit_group({{ item.group_id }})">
+                                                            <i class="ti-close"></i>
+                                                        </button>
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card" style="min-height: 485px">
+                            <div class="header">
+                                <h4 class="title">信息</h4>
+                            </div>
+                            <div class="content">
+                                <div class="streamline">
+                                    {% for log in logs %}
+                                    {% if forloop.counter <= 6 %}
+                                    <div class="sl-item sl-primary">
+                                        <div class="sl-content">
+                                            <small class="text-muted">{{ log.time }}</small>
+                                            <p>{{ log.username }}{{ log.action }}{{ log.id }}</p>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+    function delete_info(group_id,kind,callback) {
+        let request = new XMLHttpRequest()
+        let url = "/background/info_delete/"+kind+"/"+group_id+"/"
+
+        request.open("get", url, true)
+        request.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                callback.call(this, this.response)
+            }
+        }
+        request.send()
+   }
+
+    function exit_group(group_id) {
+        const input = prompt("确认退出小组，请输入1");
+        if(input == 1){
+            delete_info(group_id, "exit_group", function (res){
+                if(res=="error"){
+                    window.alert("退出失败");
+                }else if(res=="success"){
+                    window.alert("已退出");
+                    window.location.reload();
+                }
+            })
+        }
+    }
+
+
+
+    function delete_group(group_id) {
+        const input = prompt("确认删除小组，请输入1");
+        if(input == 1){
+            delete_info(group_id, "delete_group", function (res){
+                if(res=="error"){
+                    window.alert("删除失败");
+                }else if(res=="success"){
+                    window.alert("已删除");
+                    window.location.reload();
+                }
+            })
+        }
+    }
+
+    function detail(group_id){
+            window.location.replace("/background/group_detail.html/"+group_id)
+    }
+    //回调函数
+    function submit(group_id,input,callback) {
+        let request = new XMLHttpRequest()
+        let url = "/background/add_number/"+group_id+"/"+input+"/"
+        request.open("get", url, true)
+        request.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                callback.call(this, this.response)
+            }
+        }
+        request.send()
+   }
+    {#function join_group(user_id){#}
+    {#    const input = prompt("请输入小组号")#}
+    {#    if(input!=null){#}
+    {#        submit(input,user_id,function (res){#}
+    {#            if(res=="error"){#}
+    {#                window.alert("该小组不存在");#}
+    {#            }else if(res=="success"){#}
+    {#                window.alert("添加成功");#}
+    {#                window.location.reload();#}
+    {#            }#}
+    {#        })#}
+    {#    }#}
+    {#}#}
+    function join_group(user_id){
+        swal({
+                title: '请输入你想要加入的小组号',
+                html: '<div class="form-group">' +
+                          '<input id="input-field" type="text" class="form-control" />' +
+                      '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function (){
+                $.ajax({
+                    url:"/background/add_number/"+$('#input-field').val()+"/"+user_id+"/",
+                    type:"GET",
+                    error:function (){
+                        sweetAlert(
+                              '加入失败失败',
+                              '请查看输入是否正确',
+                              'error'
+                            )
+                    },
+                    success: function (){
+                            swal(
+                               '加入成功',
+                                '可以查看该小组的分享了',
+                                'success'
+                            )
+                          window.location.reload()
+                    }
+                })
+        })
+    }
+    function addnumber(group_id){
+        const input = prompt("请输入新成员的用户id");
+        submit(group_id,input,function (res){
+            if(res=="error"){
+                window.alert("该成员不存在");
+            }else if(res=="success"){
+                window.alert("添加成功");
+                window.location.reload();
+            }
+        })
+    }
+
+    </script>
+{% endblock %}

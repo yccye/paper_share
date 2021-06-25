@@ -1,0 +1,44 @@
+{% extends 'background/list_template.html' %}
+{% load static %}
+{% block mainbody %}
+<div class="main-panel">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-user">
+                        <div class="author">
+                            <a href="#pablo">
+                                <img class="img avatar" src="{% static 'img/images.jpg' %}" />
+                            </a>
+                        </div>
+{#                        <div  style="align-content: center">#}
+{#                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">#}
+{#                                <div class="fileinput-new thumbnail">#}
+{#                                    <img src="{% static 'img/images.png' %}" alt="...">#}
+{#                                </div>#}
+{#                                <div class="fileinput-preview fileinput-exists thumbnail"></div>#}
+{#                                <div>#}
+{#                                    <span class="btn btn-default btn-fill btn-file">#}
+{#                                        <span class="fileinput-new">Select image</span>#}
+{#                                        <span class="fileinput-exists">Change</span>#}
+{#                                        <input type="file" name="..." />#}
+{#                                    </span>#}
+{#                                    <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="content">
+                            <h6 class="category text-gray">用户名</h6>
+                            <h4 class="title">{{ request.session.username }}</h4>
+                            <p class="description">
+                                用户号:{{ request.session.user_id }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

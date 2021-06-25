@@ -1,0 +1,339 @@
+{% extends "background/list_template.html" %}
+{% block mainbody %}
+<div class="main-panel">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                    <i class="ti-arrow-left"></i>
+                </button>
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"> 首页 </a>
+            </div>
+            <div class="collapse navbar-collapse">
+{#                <ul class="nav navbar-nav navbar-right">#}
+{#                    <li class="dropdown">#}
+{#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                            <i class="ti-bell"></i>#}
+{#                            <span class="notification">6</span>#}
+{#                            <p class="hidden-lg hidden-md">#}
+{#                                Notifications#}
+{#                                <b class="caret"></b>#}
+{#                            </p>#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu">#}
+{#                            <li>#}
+{#                                <a href="#">You have 5 new messages</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">You're now friend with Mike</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">Wish Mary on her birthday!</a>#}
+{#                            </li>                                    <li>#}
+{#                                <a href="#">5 warnings in Server Console</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">Jane completed 'Induction Training'</a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">'Prepare Marketing Report' is overdue</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                            <i class="ti-layout-grid3-alt"></i>#}
+{#                            <p class="hidden-lg hidden-md">Apps</p>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                            <i class="ti-user"></i>#}
+{#                            <p class="hidden-lg hidden-md">Profile</p>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                            <i class="ti-settings"></i>#}
+{#                            <p class="hidden-lg hidden-md">Settings</p>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <li class="separator hidden-lg hidden-md"></li>#}
+{#                </ul>#}
+            </div>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-warning text-center">
+                                        <i class="ti-stats-up"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>用户数</p>
+                                        {{ person }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+{#                                <i class="ti-alert text-warning"></i>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-danger text-center">
+                                        <i class="ti-receipt"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>小组数</p>
+                                        {{ group }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+{#                                <i class="ti-tag text-warning"></i> Product-wise sales#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-success text-center">
+                                        <i class="ti-book"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>论文数</p>
+                                        {{ paper }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+{#                                <i class="ti-calendar"></i> Weekly sales#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-info text-center">
+                                        <i class="ti-write"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>笔记数</p>
+                                        {{ note }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+{#                                <i class="ti-reload"></i> Just Updated#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <div class="card" style="min-height: 485px">
+                        <div class="header card-header-text">
+                            <h4 class="title">小组排行</h4>
+                            <p class="category"></p>
+                        </div>
+                        <div class="content table-responsive">
+                            <table id = "datatables" class="table table-striped table-no-bordered table-hover">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th>小组号</th>
+                                        <th>小组名</th>
+                                        <th>论文数</th>
+                                        <th>笔记数</th>
+                                        <th>成员数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in group_rank %}
+                                    <tr>
+                                        <td>{{ item.group_id }}</td>
+                                        <td>{{ item.group_name }}</td>
+                                        <td>{{ item.paper_num }}</td>
+                                        <td>{{ item.note_num }}</td>
+                                        <td>{{ item.user_num }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="card" style="min-height: 485px">
+                        <div class="header">
+                            <h4 class="title">任务清单</h4>
+                        </div>
+                        <div class="content">
+                            <div class="table-full-width table-tasks">
+                                <div id="task-actions" class="dropdown pull-right">
+                                    <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                        <i class="ti-more"></i>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li>
+                                            <a href="javascript:add_task({{ request.session.user_id }})">添加任务</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <table class="table">
+                                            <tbody>
+                                            {% for item in task %}
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                            <input type="checkbox" value="" data-toggle="checkbox" {% if item.status == 1 %}checked=""{% endif %} onchange="javascript:task_chosen({{ item.task_id }})">
+                                                        </label>
+                                                    </td>
+                                                    <td>{{ item.content }}</td>
+                                                    <td class="td-actions text-right">
+                                                        <div class="table-icons">
+{#                                                            <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">#}
+{#                                                                <i class="ti-pencil-alt"></i>#}
+{#                                                            </button>#}
+                                                            <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs" onclick="delete_task({{ item.task_id }})">
+                                                                <i class="ti-close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="copyright pull-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+            </p>
+        </div>
+    </footer>
+</div>
+</div>
+<script>
+    function task_chosen(task_id){
+        $.ajax({
+            url: '/background/task/toggle/'+task_id+"/",
+            type:'GET'
+        })
+    }
+    function delete_task(task_id){
+        swal({
+              title: '是否完成该任务？',
+              type: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '已完成！',
+            }).then(function(){
+                $.ajax({
+                    url:"/background/task/delete/"+task_id+"/",
+                    type:"GET",
+                    error:function (){
+                        sweetAlert(
+                              '删除失败',
+                                ' ',
+                                'error'
+                            )
+                    },
+                    success: function (){
+                            swal(
+                               '删除成功',
+                                ' ',
+                                'success'
+                            )
+                        window.location.reload()
+                    }
+                })
+            })
+    }
+    function add_task(user_id){
+        swal({
+                title: '输入内容',
+                html: '<div class="form-group">' +
+                          '<input id="input-field" type="text" class="form-control" />' +
+                      '</div>',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function (){
+                $.ajax({
+                    url:"/background/task/add/"+$('#input-field').val()+"/",
+                    type:"GET",
+                    error:function (){
+                        sweetAlert(
+                              '添加失败',
+                                '请重试',
+                                'error'
+                            )
+                    },
+                    success: function (){
+                            swal(
+                               '添加成功',
+                                '加油',
+                                'success'
+                            )
+                          window.location.reload()
+                    }
+                })
+        })
+    }
+</script>
+{% endblock %}
